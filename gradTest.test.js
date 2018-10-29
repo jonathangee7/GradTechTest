@@ -1,5 +1,29 @@
 function createMenuData(data) {
-
+	var parents = [];
+	var answer = [];
+	for(i=0;i<data.length;i++){
+	if(data[i].includes("/")){
+		var slash = data[i].indexOf("/");
+	if(!(parents.includes(data[i].slice(0,slash)))){
+		parents.push(data[i].slice(0,slash));
+	}
+	
+	}
+	}
+	
+	for(j=0;j<parents.length;j++){
+		var parent = {title:parents[j]};
+		var childlist = [];
+	for(k=0;k<data.length;k++){
+	if(data[k].includes(parents[j]+"/")){
+		var stringlength = data[k].length;
+		childlist.push(data[k].slice((slash+1),stringlength));
+	}
+	}
+		parent.data = childlist;
+		answer.push(parent);
+	}
+	return answer;
 }
 
 describe("menu Data Generator", () => {
